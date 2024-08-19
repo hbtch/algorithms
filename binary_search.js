@@ -12,13 +12,13 @@ function binarySearch(array, item) {
     let found = false;
 //переменная position это позициця самого элемента,который мы будем возвращать из функции, если элемент не был найден,мы вернем -1
     let position = -1;
-//в цикле крутимся до тех пор пока либо не нашли элемент,либо стартовая и коненач позиция не стали равны
+//в цикле крутимся до тех пор пока либо не нашли элемент,либо стартовая и конечная позиция не стали равны
     while (found === false && start <= end) {
 //считаем количество итераций
         count +=1;
 //внутри цикла высчитываем позицию центрального элемента
         middle = Math.floor((start+end) / 2);
-//если это полченное среднее значение равно тому,которое мы ищем, цикл остановится
+//если это полученное среднее значение равно тому,которое мы ищем, цикл остановится
         if (array[middle] === item) {
             found = true;
             position = middle;
@@ -38,3 +38,19 @@ function binarySearch(array, item) {
 console.log(binarySearch(array, 8));
 console.log(count);
 //Сложность алгоритма: О(log2n) у нас 16 элементов,  2 в 4 степени равен 16, значит 4 максимальное количество операций.
+
+//Сделаем то же самое с помощью рекурсивной функции:
+function recursiveBinarySearch(array, item, start, end) {
+    let middle = Math.floor((start+end) / 2)
+    count +=1;
+    if (item === array[middle]) {
+        return middle
+    }
+    if(item < array[middle]) {
+        return recursiveBinarySearch(array, item, start, middle-1)
+    } else {
+        return recursiveBinarySearch(array, item, middle+1, end)
+    }
+}
+console.log(recursiveBinarySearch(array, 12, 0, array.length))
+console.log(count)
